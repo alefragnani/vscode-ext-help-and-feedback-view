@@ -31,19 +31,19 @@ Step 2: Instantiate the View and provide the links to be used
            Link,
            GetStartedLink,
            ProvideFeedbackLink,
-           ReviewIssuesLink,
-           ReportIssueLink } from "vscode-ext-help-and-feedback-view";
+           PredefinedLinksProvider } from "vscode-ext-help-and-feedback-view";
 
   ...
 
   const links: Link[] = [];
-  
-  // some pre-defined links
-  links.push(new GetStartedLink('http://github.com/alefragnani/vscode-project-manager'));
-  links.push(new ProvideFeedbackLink('projectManager'));
-  links.push(new ReviewIssuesLink("http://github.com/alefragnani/vscode-project-manager/issues"));
-  links.push(new ReportIssueLink("http://github.com/alefragnani/vscode-project-manager/issues/new/choose"));
 
+  // some predefined links
+  const predefinedLinksProvider = new PredefinedLinksProvider('alefragnani.project-manager');
+  links.push(predefinedLinksProvider.getGetStartedLink());
+  links.push(new ProvideFeedbackLink('projectmanager'));
+  links.push(predefinedLinksProvider.getReviewIssuesLink());
+  links.push(predefinedLinksProvider.getReportIssueLink());
+  
   // any custom link
   links.push({
         icon: 'heart',
