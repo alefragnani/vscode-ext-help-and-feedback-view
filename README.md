@@ -2,7 +2,7 @@
 
 This module provides a **View** on any **Side Bar**, to display **Help and Feedback** links. 
 
-The idea for this module came from the `Help and Feedback` view displayed on the **Remote Development** extension from VS Code.
+The idea for this module came from the `Help and Feedback` view displayed on the **Remote Development** extensions for VS Code.
 
 ## Installation
 
@@ -10,7 +10,7 @@ The idea for this module came from the `Help and Feedback` view displayed on the
 
 ## Usage
 
-Step 1: Register the new view on `package.json`
+**Step 1:** Register the new view on `package.json`
 
 ```json
 
@@ -24,39 +24,79 @@ Step 1: Register the new view on `package.json`
     ]
 ```
 
-Step 2: Instantiate the View and provide the links to be used
+**Step 2:** Choose between the three kinds of Items to be displayed
+
+**Predefined Links**
+
+Use `URLs` from your `package.json`
+
+```ts
+  const predefinedLinksProvider = new PredefinedLinksProvider('alefragnani.project-manager');
+  items.push(predefinedLinksProvider.getGetStartedLink());
+```
+
+**Custom Links**
+
+Provide the desired `URL` yourself
+
+```ts
+  items.push({
+    icon: 'heart',
+    title: 'Become a Patron',
+    url: 'http://patreon.com/alefragnani'
+  });
+```
+
+**Commands**
+
+Provide any registered `Command`
+
+```ts
+  items.push({
+    icon: 'bell-dot',
+    title: 'What\'s New',
+    command: 'projectManager.whatsNew'
+  })
+```
+
+**Step 3:** Instantiate the View and provide the items
+
+```ts
+  const helpAndFeebackView = new HelpAndFeedbackView(context, "projectManagerHelpAndFeedback", items);
+```
+
+## Sample
 
 ```ts
   import { HelpAndFeedbackView, 
            Link,
-           GetStartedLink,
+           Command,
            ProvideFeedbackLink,
            PredefinedLinksProvider } from "vscode-ext-help-and-feedback-view";
 
   ...
 
-  const links: Link[] = [];
+  const items = new Array<Link | Command>();
 
-  // some predefined links
+  // some predefined items
   const predefinedLinksProvider = new PredefinedLinksProvider('alefragnani.project-manager');
-  links.push(predefinedLinksProvider.getGetStartedLink());
-  links.push(new ProvideFeedbackLink('projectmanager'));
-  links.push(predefinedLinksProvider.getReviewIssuesLink());
-  links.push(predefinedLinksProvider.getReportIssueLink());
+  items.push(predefinedLinksProvider.getGetStartedLink());
+  items.push(new ProvideFeedbackLink('projectmanager'));
+  items.push(predefinedLinksProvider.getReviewIssuesLink());
+  items.push(predefinedLinksProvider.getReportIssueLink());
   
-  // any custom link
-  links.push({
+  // any custom link 
+  items.push({
         icon: 'heart',
         title: 'Become a Patron',
         url: 'http://patreon.com/alefragnani'
   });
   
   // creates the view
-  const helpAndFeebackView = new HelpAndFeedbackView(context, "projectManagerHelpAndFeedback", links);
-
+  const helpAndFeebackView = new HelpAndFeedbackView(context, "projectManagerHelpAndFeedback", items);
 ```
 
-Step 3: Enjoy
+Here it is
 
 ![printscreen](images/printscreen.png)
 
