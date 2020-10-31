@@ -31,7 +31,7 @@ export class ProvideFeedbackLink extends PredefinedLink {
 
 export class ReviewIssuesLink extends PredefinedLink {
   constructor (url: string) {
-    super('info', 'Read Issues', url)
+    super('info', 'Review Issues', url)
   }
 }
 
