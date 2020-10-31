@@ -5,42 +5,42 @@
 
 import { Link } from "./link"
 
-class PreDefinedLink implements Link {
+class PredefinedLink implements Link {
   constructor (public icon: string, public title: string, public url: string) { }
 }
 
-export class GetStartedLink extends PreDefinedLink {
+export class GetStartedLink extends PredefinedLink {
   constructor (url: string) {
     super('star', 'Get Started', url)
   }
 }
 
-export class ReadDocumentationLink extends PreDefinedLink {
+export class ReadDocumentationLink extends PredefinedLink {
   constructor (url: string) {
     super('book', 'Read Documentation', url)
   }
 }
 
-export class ProvideFeedbackLink extends PreDefinedLink {
+export class ProvideFeedbackLink extends PredefinedLink {
   constructor (url: string) {
     super('twitter', 'Provide Feedback', 
     `https://twitter.com/intent/tweet?hashtags=${url}&text=%40code`)
   }
 }
 
-export class ReviewIssuesLink extends PreDefinedLink {
+export class ReviewIssuesLink extends PredefinedLink {
   constructor (url: string) {
     super('info', 'Read Issues', url)
   }
 }
 
-export class ReportIssueLink extends PreDefinedLink {
+export class ReportIssueLink extends PredefinedLink {
   constructor (public url: string) {
     super('comment', 'Report Issue', url)
   }
 }
 
-export class SupportLink extends PreDefinedLink {
+export class SupportLink extends PredefinedLink {
   constructor (public url: string) {
     super('heart', 'Support', url)
   }
