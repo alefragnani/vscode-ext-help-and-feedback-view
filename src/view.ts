@@ -4,7 +4,7 @@
 *--------------------------------------------------------------------------------------------*/
 
 import { TreeView, ExtensionContext, window } from "vscode";
-import { Link } from "./link";
+import { Command, Link } from "./link";
 import { Node } from "./node";
 import { registerOpenUrlCommand } from "./openUrl";
 import { DataProvider } from "./provider";
@@ -14,9 +14,9 @@ export class HelpAndFeedbackView {
   private helpViewer: TreeView<Node>;
   private treeDataProvider: DataProvider;
 
-  constructor(context: ExtensionContext, viewId: string, links: Link[]) {
+  constructor(context: ExtensionContext, viewId: string, items: Array<Link | Command>) {
     registerOpenUrlCommand();
-    this.treeDataProvider = new DataProvider(context, links);
+    this.treeDataProvider = new DataProvider(context, items);
     this.helpViewer = window.createTreeView(viewId, { 
       treeDataProvider: this.treeDataProvider, 
       showCollapseAll: false } );

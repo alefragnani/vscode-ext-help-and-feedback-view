@@ -4,11 +4,11 @@
 *--------------------------------------------------------------------------------------------*/
 
 export {HelpAndFeedbackView} from './view';
-export {Link} from './link';
+export {Link, Command} from './link';
 export {GetStartedLink, 
         ReadDocumentationLink, 
         ProvideFeedbackLink, 
         ReviewIssuesLink, 
         ReportIssueLink, 
         SupportLink,
-        PredefinedLinksProvider} from './preDefinedLinks';
+        PredefinedLinksProvider} from './predefinedLinks';

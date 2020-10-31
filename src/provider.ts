@@ -4,20 +4,20 @@
 *--------------------------------------------------------------------------------------------*/
 
 import { Event, EventEmitter, ExtensionContext, TreeDataProvider, TreeItem } from "vscode";
-import { Link } from "./link";
+import { Command, isLink, Link } from "./link";
 import { Node } from "./node";
 
 export class DataProvider implements TreeDataProvider<Node> {
   context: ExtensionContext;
-  links: Link[];
+  items: Array<Link | Command>;
 
   private _onDidChangeTreeData: EventEmitter<Node | undefined> = new EventEmitter<Node | undefined>();
 	readonly onDidChangeTreeData: Event<Node | undefined> = this._onDidChangeTreeData.event;
 
 
-  constructor(context: ExtensionContext, links: Link[]) {
+  constructor(context: ExtensionContext, items: Array<Link | Command>) {
     this.context = context;
-    this.links = links;
+    this.items = items;
   }
   
   getTreeItem(element: Node): TreeItem | Thenable<TreeItem> {
@@ -28,8 +28,12 @@ export class DataProvider implements TreeDataProvider<Node> {
   getChildren(element?: Node): Thenable<Node[]> {
     return new Promise(resolve => {
       const links: Node[] = [];
-      this.links.forEach(link => {
-        links.push(new Node(link.title, link.icon, {title: link.title, command: 'openHelpLink', arguments: [link.url]}));
+      this.items.forEach(item => {
+        if (isLink(item)) {
+          links.push(new Node(item.title, item.icon, {title: item.title, command: 'openHelpLink', arguments: [item.url]}));
+        } else {
+          links.push(new Node(item.title, item.icon, {title: item.title, command: item.command}));
+        }
       });
       resolve(links);
     });
