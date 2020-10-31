@@ -4,50 +4,50 @@
 *--------------------------------------------------------------------------------------------*/
 
 import { Extension, extensions } from "vscode"
-import { Link } from "./link"
+import { Link } from "./items"
 
-class PredefinedLink implements Link {
+class StandardLink implements Link {
   constructor (public icon: string, public title: string, public url: string) { }
 }
 
-export class GetStartedLink extends PredefinedLink {
+export class GetStartedLink extends StandardLink {
   constructor (url: string) {
     super('star', 'Get Started', url)
   }
 }
 
-export class ReadDocumentationLink extends PredefinedLink {
+export class ReadDocumentationLink extends StandardLink {
   constructor (url: string) {
     super('book', 'Read Documentation', url)
   }
 }
 
-export class ProvideFeedbackLink extends PredefinedLink {
+export class ProvideFeedbackLink extends StandardLink {
   constructor (url: string) {
     super('twitter', 'Provide Feedback', 
     `https://twitter.com/intent/tweet?hashtags=${url}&text=%40code`)
   }
 }
 
-export class ReviewIssuesLink extends PredefinedLink {
+export class ReviewIssuesLink extends StandardLink {
   constructor (url: string) {
     super('info', 'Review Issues', url)
   }
 }
 
-export class ReportIssueLink extends PredefinedLink {
+export class ReportIssueLink extends StandardLink {
   constructor (public url: string) {
     super('comment', 'Report Issue', url)
   }
 }
 
-export class SupportLink extends PredefinedLink {
+export class SupportLink extends StandardLink {
   constructor (public url: string) {
     super('heart', 'Support', url)
   }
 }
 
-export class PredefinedLinksProvider {
+export class StandardLinksProvider {
 
   private extension: Extension<any>;
 

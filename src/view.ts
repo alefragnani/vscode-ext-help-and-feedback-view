@@ -4,7 +4,7 @@
 *--------------------------------------------------------------------------------------------*/
 
 import { TreeView, ExtensionContext, window } from "vscode";
-import { Command, Link } from "./link";
+import { Command, Link } from "./items";
 import { Node } from "./node";
 import { registerOpenUrlCommand } from "./openUrl";
 import { DataProvider } from "./provider";

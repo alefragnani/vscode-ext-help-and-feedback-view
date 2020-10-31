@@ -4,7 +4,7 @@
 *--------------------------------------------------------------------------------------------*/
 
 import { Event, EventEmitter, ExtensionContext, TreeDataProvider, TreeItem } from "vscode";
-import { Command, isLink, Link } from "./link";
+import { Command, isLink, Link } from "./items";
 import { Node } from "./node";
 
 export class DataProvider implements TreeDataProvider<Node> {
