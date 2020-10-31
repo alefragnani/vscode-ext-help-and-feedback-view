@@ -26,13 +26,13 @@ The idea for this module came from the `Help and Feedback` view displayed on the
 
 **Step 2:** Choose between the three kinds of Items to be displayed
 
-**Predefined Links**
+**Standard Links**
 
 Use `URLs` from your `package.json`
 
 ```ts
-  const predefinedLinksProvider = new PredefinedLinksProvider('alefragnani.project-manager');
-  items.push(predefinedLinksProvider.getGetStartedLink());
+  const standardLinksProvider = new StandardLinksProvider('alefragnani.project-manager');
+  items.push(standardLinksProvider.getGetStartedLink());
 ```
 
 **Custom Links**
@@ -72,18 +72,18 @@ Provide any registered `Command`
            Link,
            Command,
            ProvideFeedbackLink,
-           PredefinedLinksProvider } from "vscode-ext-help-and-feedback-view";
+           StandardLinksProvider } from "vscode-ext-help-and-feedback-view";
 
   ...
 
   const items = new Array<Link | Command>();
 
-  // some predefined items
-  const predefinedLinksProvider = new PredefinedLinksProvider('alefragnani.project-manager');
-  items.push(predefinedLinksProvider.getGetStartedLink());
+  // some standard items
+  const standardLinksProvider = new StandardLinksProvider('alefragnani.project-manager');
+  items.push(standardLinksProvider.getGetStartedLink());
   items.push(new ProvideFeedbackLink('projectmanager'));
-  items.push(predefinedLinksProvider.getReviewIssuesLink());
-  items.push(predefinedLinksProvider.getReportIssueLink());
+  items.push(standardLinksProvider.getReviewIssuesLink());
+  items.push(standardLinksProvider.getReportIssueLink());
   
   // any custom link 
   items.push({
