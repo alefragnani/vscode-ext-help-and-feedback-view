@@ -3,6 +3,7 @@
 *  Licensed under the MIT License. See License.md in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
+import { Extension, extensions } from "vscode"
 import { Link } from "./link"
 
 class PredefinedLink implements Link {
@@ -43,5 +44,30 @@ export class ReportIssueLink extends PredefinedLink {
 export class SupportLink extends PredefinedLink {
   constructor (public url: string) {
     super('heart', 'Support', url)
+  }
+}
+
+export class PredefinedLinksProvider {
+
+  private extension: Extension<any>;
+
+  constructor (public extensionId: string) {  
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    this.extension = extensions.getExtension(this.extensionId)!;
+  }
+
+  public getGetStartedLink(): Link {
+    return new GetStartedLink(this.extension.packageJSON.homepage);
+  }
+
+  public getReadDocumentation(): Link {
+    return new ReadDocumentationLink(this.extension.packageJSON.homepage);
+  }
+
+  public getReviewIssuesLink(): Link {
+    return new ReviewIssuesLink(this.extension.packageJSON.bugs.url);
+  }
+  public getReportIssueLink(): Link {
+    return new ReportIssueLink(`${this.extension.packageJSON.bugs.url}/new/choose`);
   }
 }

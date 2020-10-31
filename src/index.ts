@@ -10,4 +10,5 @@ export {GetStartedLink,
         ProvideFeedbackLink, 
         ReviewIssuesLink, 
         ReportIssueLink, 
-        SupportLink} from './predefinedLinks';
+        SupportLink,
+        PredefinedLinksProvider} from './preDefinedLinks';
