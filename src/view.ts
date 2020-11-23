@@ -15,8 +15,8 @@ export class HelpAndFeedbackView {
   private treeDataProvider: DataProvider;
 
   constructor(context: ExtensionContext, viewId: string, items: Array<Link | Command>) {
-    registerOpenUrlCommand();
-    this.treeDataProvider = new DataProvider(context, items);
+    registerOpenUrlCommand(viewId);
+    this.treeDataProvider = new DataProvider(context, viewId, items);
     this.helpViewer = window.createTreeView(viewId, { 
       treeDataProvider: this.treeDataProvider, 
       showCollapseAll: false } );

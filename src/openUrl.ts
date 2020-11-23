@@ -5,7 +5,7 @@
 
 import { commands, env, Uri } from "vscode";
 
-export function registerOpenUrlCommand() {
-  commands.registerCommand("openHelpLink", (url: string) => {
+export function registerOpenUrlCommand(viewId: string) {
+  commands.registerCommand(`${viewId}.openHelpLink`, (url: string) => {
     env.openExternal(Uri.parse(url));
 })}

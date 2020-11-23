@@ -9,14 +9,16 @@ import { Node } from "./node";
 
 export class DataProvider implements TreeDataProvider<Node> {
   context: ExtensionContext;
+  viewId: string;
   items: Array<Link | Command>;
 
   private _onDidChangeTreeData: EventEmitter<Node | undefined> = new EventEmitter<Node | undefined>();
 	readonly onDidChangeTreeData: Event<Node | undefined> = this._onDidChangeTreeData.event;
 
 
-  constructor(context: ExtensionContext, items: Array<Link | Command>) {
+  constructor(context: ExtensionContext, viewId: string, items: Array<Link | Command>) {
     this.context = context;
+    this.viewId = viewId;
     this.items = items;
   }
   
@@ -30,7 +32,7 @@ export class DataProvider implements TreeDataProvider<Node> {
       const links: Node[] = [];
       this.items.forEach(item => {
         if (isLink(item)) {
-          links.push(new Node(item.title, item.icon, {title: item.title, command: 'openHelpLink', arguments: [item.url]}));
+          links.push(new Node(item.title, item.icon, {title: item.title, command: `${this.viewId}.openHelpLink`, arguments: [item.url]}));
         } else {
           links.push(new Node(item.title, item.icon, {title: item.title, command: item.command}));
         }
